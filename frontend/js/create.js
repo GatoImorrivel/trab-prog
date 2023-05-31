@@ -1,3 +1,5 @@
+import { get, post } from "./api.js";
+
 const btnRef = document.getElementById('submit-btn');
 
 // Form
@@ -11,20 +13,12 @@ btnRef.addEventListener('click', create);
 function create(e) {
     e.preventDefault();
 
-    fetch('http://localhost:8080/api.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: nameRef.value,
-            email: emailRef.value,
-            password: passwordRef.value,
-            birth: birthRef.value,
-        })
-    }).then(data => {
-        console.log(data);
-    }).catch(e => {
+    get('http://localhost:8080/api.php')
+    .then(data => { 
+        console.log(data); 
+    })
+    .catch(e => {
         console.log(e);
     });
+    return false;
 }
