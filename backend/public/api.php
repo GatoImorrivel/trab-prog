@@ -1,15 +1,15 @@
 <?php
-require_once __DIR__ . '/../model/person.php';
+header('Access-Control-Allow-Origin: http://localhost:3000');
+echo "hello";
 
-echo 'hello';
-
+/*
 try {
     $pdo = new PDO('mysql:host=database;port=3306;dbname=myappdb', 'root', 'root');
 
     $model = $_GET['model'];
     $action = $_GET['action'];
 
-    $model->$action();
 } catch (PDOException $e) {
     echo 'Connection Failed' . $e->getMessage();
 }
+*/

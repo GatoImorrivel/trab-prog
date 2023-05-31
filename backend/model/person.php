@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/person.php';
+require_once __DIR__ . '/model.php';
 
 class Person extends Model {
     protected $table = "person";
