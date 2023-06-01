@@ -19,7 +19,7 @@ CREATE TABLE personRole
 (
   idRole BIGINT NOT NULL,
   idPerson BIGINT NOT NULL,
-  PRIMARY KEY (idRole, idUser)
+  PRIMARY KEY (idRole, idPerson)
 );
 
 CREATE TABLE role
@@ -36,5 +36,5 @@ ALTER TABLE personRole
 
 ALTER TABLE personRole
   ADD CONSTRAINT FK_person_TO_personRole
-    FOREIGN KEY (idUser)
+    FOREIGN KEY (idPerson)
     REFERENCES person (idPerson);
