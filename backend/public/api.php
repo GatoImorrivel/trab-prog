@@ -23,5 +23,6 @@ try {
 
     echo json_encode($result);
 } catch (PDOException $e) {
-    echo 'Connection Failed' . $e->getMessage();
+    http_response_code(400);
+    echo $e->getMessage();
 }

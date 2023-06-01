@@ -18,7 +18,7 @@ CREATE TABLE person
 CREATE TABLE personRole
 (
   idRole BIGINT NOT NULL,
-  idUser BIGINT NOT NULL,
+  idPerson BIGINT NOT NULL,
   PRIMARY KEY (idRole, idUser)
 );
 

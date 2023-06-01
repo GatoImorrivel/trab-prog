@@ -17,15 +17,30 @@ class Person {
     }
 
     public function save($params) {
-        return $this->pdo->executeSQL(
-            "INSERT INTO person (name, password, email, birth) 
-            VALUES (:name, :password, :email, :birth)"
-        ,
-        [
-            "name" => $params->name,
-            "password" => $params->password,
-            "email" => $params->email,
-            "birth" => $params->birth
-        ]);
+        try {
+            $this->pdo->executeSQL(
+                "INSERT INTO person (name, password, email) 
+                VALUES (:name, :password, :email)"
+            ,
+            [
+                "name" => $params->name,
+                "password" => $params->password,
+                "email" => $params->email,
+            ]);
+
+            $idPerson = $this->pdo->getLastInsertedId();
+            foreach($params->roles as $idRole) {
+                $this->pdo->executeSQL(
+                    "INSERT INTO personRole (idPerson, idRole) 
+                    VALUES (:idPerson, :idRole)"
+                ,
+                [
+                    "idPerson" => $idPerson,
+                    "idRole" => $idRole,
+                ]);
+            } 
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 }

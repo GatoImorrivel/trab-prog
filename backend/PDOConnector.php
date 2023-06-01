@@ -18,6 +18,7 @@ class PDOConnector {
 
     public function executeSQL($sql, $params = []) {
         try {
+            $this->pdo->beginTransaction();
             $stmt = $this->pdo->prepare($sql);
 
             foreach($params as $key => $value) {
@@ -25,10 +26,15 @@ class PDOConnector {
             }
 
             $result = $stmt->execute();
+            $this->pdo->commit();
             return $result;
         } catch (PDOException $e) {
-            http_response_code(400);
-            return $e->getMessage();
+            $this->pdo->rollBack();
+            throw $e;
         }
+    }
+
+    public function getLastInsertedId() {
+        return $this->pdo->lastInsertId();
     }
 }

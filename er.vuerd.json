@@ -3,7 +3,7 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -37,
+    "scrollTop": -36,
     "scrollLeft": -44,
     "zoomLevel": 1,
     "show": {
@@ -304,7 +304,7 @@
           "active": false,
           "left": 986,
           "top": 178,
-          "zIndex": 330,
+          "zIndex": 2,
           "widthName": 60,
           "widthComment": 60
         },
@@ -363,10 +363,10 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 64,
           "top": 270,
-          "zIndex": 336,
+          "zIndex": 3,
           "widthName": 60,
           "widthComment": 60
         },
@@ -401,7 +401,7 @@
             "id": "f2f9292b-d548-47c1-ad85-f54d3a4dee24"
           },
           {
-            "name": "idUser",
+            "name": "idPerson",
             "comment": "",
             "dataType": "BIGINT",
             "default": "",
@@ -428,7 +428,7 @@
           "active": false,
           "left": 527,
           "top": 270,
-          "zIndex": 315,
+          "zIndex": 5,
           "widthName": 68.4853515625,
           "widthComment": 60
         },
