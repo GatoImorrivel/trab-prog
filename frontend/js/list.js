@@ -46,6 +46,5 @@ async function loadPeople() {
 
     for (const person of people) {
         createRow(person);
-        createRow(person);
     }
 }
