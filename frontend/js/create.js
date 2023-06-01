@@ -1,17 +1,23 @@
 import { get, post } from "./api.js";
 
-const btnRef = document.getElementById('submit-btn');
+const createPersonBtnRef = document.getElementById('create-person-btn');
+const createRoleBtnRef = document.getElementById('create-role-btn');
 
-// Form
+createPersonBtnRef.addEventListener('click', createPerson);
+createRoleBtnRef.addEventListener('click', createRole);
+
+// Person Form
 const emailRef = document.getElementById('email');
 const nameRef = document.getElementById('name');
 const passwordRef = document.getElementById('password');
 const birthRef = document.getElementById('birth');
 
-btnRef.addEventListener('click', create);
 birthRef.addEventListener('change', formatDate);
 
-function create(e) {
+// Role Form
+const roleNameRef = document.getElementById('role-name');
+
+function createPerson(e) {
     e.preventDefault();
 
     const data = {
@@ -22,6 +28,17 @@ function create(e) {
     };
 
     post('/api.php', 'person', 'save', data);
+    return false;
+}
+
+function createRole(e) {
+    e.preventDefault();
+
+    const data = {
+        role: roleNameRef.value,
+    };
+
+    post('/api.php', 'role', 'save', data);
     return false;
 }
 

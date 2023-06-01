@@ -1,4 +1,4 @@
-export const BACKEND_URL = 'http://localhost:8080/'
+export const BACKEND_URL = 'http://localhost:8080'
 
 export async function post(url, model, action, data) {
     const response = await fetch(`${BACKEND_URL}${url}?model=${model}&action=${action}`, {
@@ -11,10 +11,9 @@ export async function post(url, model, action, data) {
 
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status} \n ${await response.text()}`);
+    } else {
+        console.log("Success " + await response.text());
     }
-
-    const json = await response.json();
-    return json;
 }
 
 export async function get(url, model, action, params) {
