@@ -15,7 +15,9 @@ try {
 
     $model = $_GET['model'];
     $action = $_GET['action'];
-    $data = json_decode(file_get_contents('php://input'));
+    $post = (array) json_decode(file_get_contents('php://input'));
+
+    $data = (object) array_merge($post, $_GET);
 
     $obj = new $model($pdoConnector);
 

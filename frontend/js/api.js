@@ -19,9 +19,9 @@ export async function post(url, model, action, data) {
 export async function get(url, model, action, params) {
     url = `${BACKEND_URL}${url}?model=${model}&action=${action}`;
     if (params != undefined) {
-        let paramString = "&";
+        let paramString = "";
         for (const [key, value] of Object.entries(params)) {
-            paramString += `${key}=${value}&`;
+            paramString += `&${key}=${value}`;
         }
         
         url += paramString;
