@@ -16,6 +16,14 @@ class Person {
         , []);
     }
 
+    public function get($params) {
+        $id = $params->id;
+
+        return $this->pdo->query(
+            "SELECT * FROM person WHERE person.idPerson = :id"
+        , ["id" => $id]);
+    }
+
     public function save($params) {
         try {
             $this->pdo->executeSQL(
