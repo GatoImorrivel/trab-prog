@@ -1,21 +1,31 @@
 <?php
 
-require_once __DIR__ . '/model.php';
+require_once __DIR__ . '/../PDOConnector.php';
 
-class Person extends Model {
-    protected $table = "person";
+class Person {
+    /** @var PDOConnector */
+    private $pdo;
 
-    protected $columns = [
-        "idPerson",
-        "email",
-        "name",
-        "password",
-        "photo",
-        "birth",
-        "cellphone",
-        "createdOn",
-        "sysWhats",
-        "sysConfirmEmail",
-        "sysConfirmTerms"
-    ];
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+
+    public function getAll() {
+        return $this->pdo->query(
+            "SELECT * FROM person"
+        , []);
+    }
+
+    public function save($params) {
+        return $this->pdo->executeSQL(
+            "INSERT INTO person (name, password, email, birth) 
+            VALUES (:name, :password, :email, :birth)"
+        ,
+        [
+            "name" => $params->name,
+            "password" => $params->password,
+            "email" => $params->email,
+            "birth" => $params->birth
+        ]);
+    }
 }
