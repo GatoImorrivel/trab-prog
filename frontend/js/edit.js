@@ -14,8 +14,9 @@ const passwordRef = document.getElementById('password');
 const birthRef = document.getElementById('birth');
 const roleSelectRef = document.getElementById('role-select-container');
 
-loadRoles();
-lazyLoadPerson();
+loadRoles().then(() => {
+    lazyLoadPerson();
+})
 
 async function lazyLoadPerson() {
     const data = await get('/api.php', 'person', 'get', {id: queryIdPerson});

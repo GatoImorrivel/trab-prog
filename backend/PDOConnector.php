@@ -3,6 +3,7 @@ class PDOConnector {
 
     /** @var PDO */
     private $pdo;
+    private $lastInsertId;
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
@@ -26,6 +27,7 @@ class PDOConnector {
             }
 
             $result = $stmt->execute();
+            $this->lastInsertId = $this->pdo->lastInsertId();
             $this->pdo->commit();
             return $result;
         } catch (PDOException $e) {
@@ -35,6 +37,6 @@ class PDOConnector {
     }
 
     public function getLastInsertedId() {
-        return $this->pdo->lastInsertId();
+        return $this->lastInsertId;
     }
 }

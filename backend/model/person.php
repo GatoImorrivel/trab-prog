@@ -17,11 +17,26 @@ class Person {
     }
 
     public function get($params) {
-        $id = $params->id;
+        try {
+            $id = $params->id;
 
-        return $this->pdo->query(
-            "SELECT * FROM person WHERE person.idPerson = :id"
-        , ["id" => $id]);
+            $person = (object) $this->pdo->query(
+                "SELECT * FROM person WHERE person.idPerson = :id"
+            , ["id" => $id]);
+
+            $roles = $this->pdo->query(
+                "SELECT * FROM person
+                INNER JOIN personRole ON personRole.idPerson = person.idPerson
+                INNER JOIN role on role.idRole = personRole.idRole
+                WHERE person.idPerson = :id"
+            , ["id" => $person->idPerson]);
+
+            $person->roles = $roles;
+
+            return $person;
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 
     public function save($params) {
@@ -39,12 +54,12 @@ class Person {
             $idPerson = $this->pdo->getLastInsertedId();
             foreach($params->roles as $idRole) {
                 $this->pdo->executeSQL(
-                    "INSERT INTO personRole (idPerson, idRole) 
-                    VALUES (:idPerson, :idRole)"
+                    "INSERT INTO personRole (idRole, idPerson) 
+                    VALUES (:person, :role)"
                 ,
                 [
-                    "idPerson" => $idPerson,
-                    "idRole" => $idRole,
+                    "person" => $idPerson,
+                    "role" => $idRole,
                 ]);
             } 
         } catch (PDOException $e) {
