@@ -12,7 +12,10 @@ const nameRef = document.getElementById('name');
 const passwordRef = document.getElementById('password');
 const birthRef = document.getElementById('birth');
 const roleSelectRef = document.getElementById('role-select-container');
-birthRef.addEventListener('change', formatDate);
+
+birthRef.oninput = (e) => {
+    e.target.value = formatDate(e.target.value);
+}
 
 loadRoles();
 
@@ -81,9 +84,23 @@ async function createRole(e) {
     return false;
 }
 
-function formatDate() {
-    var inputDate = document.getElementById("birth").value;
-    var parts = inputDate.split("-");
-    var formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
-    document.getElementById("birth").value = formattedDate;
+function formatDate(input) {
+    const inputValue = input.replace(/\D/g, '');
+
+    const day = inputValue.slice(0, 2);
+    const month = inputValue.slice(2, 4);
+    const year = inputValue.slice(4, 8);
+
+    let formattedDate = "";
+    if (day != null) {
+        formattedDate += day + "/";
+    }
+    if (month != null) {
+        formattedDate += month + "/";
+    }
+    if (year != null) {
+        formattedDate += year;
+    }
+
+    return formattedDate;
 }

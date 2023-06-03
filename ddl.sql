@@ -28,13 +28,3 @@ CREATE TABLE role
   role   VARCHAR(255) NOT NULL,
   PRIMARY KEY (idRole)
 );
-
-ALTER TABLE personRole
-  ADD CONSTRAINT FK_role_TO_personRole
-    FOREIGN KEY (idRole)
-    REFERENCES role (idRole);
-
-ALTER TABLE personRole
-  ADD CONSTRAINT FK_person_TO_personRole
-    FOREIGN KEY (idPerson)
-    REFERENCES person (idPerson);

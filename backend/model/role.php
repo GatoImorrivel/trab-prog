@@ -11,9 +11,11 @@ class Role {
     }
 
     public function getAll() {
-        return $this->pdo->query(
+        $this->pdo->query(
             "SELECT * FROM role"
         , []);
+
+        return $this->pdo->getResultObj();
     }
 
     public function save($params) {
